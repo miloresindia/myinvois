@@ -894,6 +894,8 @@ def validate_before(invoice_number, any_item_has_tax_template=False):
 
 def validate_before_submit(doc, _method=None):
     """validating the invoice before submission"""
+    if not frappe.db.get_value("Company", doc.company, "custom_enable_lhdn_invoice"):
+        return
     # frappe.throw(f"Triggered submit_document for {doc.name}")
     validate_before(doc.name)
     if not doc.custom_invoicetype_code:
