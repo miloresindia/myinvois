@@ -798,6 +798,8 @@ def validate_msic(company_doc):
 
 def validate_before_submit(doc, _method=None):
     """validating the invoice before submission"""
+    if not frappe.db.get_value("Company", doc.company, "custom_enable_lhdn_invoice"):
+        return
     validate_before(doc.name)
 
 def submit_validate_item_tax_tem(sales_invoice_doc):
