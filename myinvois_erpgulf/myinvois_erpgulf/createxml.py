@@ -1331,7 +1331,7 @@ def delayed_qr_generation(sales_invoice_name):
 # print(f"QR Code generated and saved at {qr_image_path}")
 def after_submit(sales_invoice_doc, _method=None):
     """Run QR generation only if not already attached."""
-	if not frappe.db.get_value("Company", sales_invoice_doc.company, "custom_enable_lhdn_invoice"):
+    if not frappe.db.get_value("Company", sales_invoice_doc.company, "custom_enable_lhdn_invoice"):
         return
     existing_qr = frappe.get_all(
         "File",
