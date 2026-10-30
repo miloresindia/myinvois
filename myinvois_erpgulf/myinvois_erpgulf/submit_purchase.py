@@ -990,6 +990,8 @@ def submit_document(invoice_number : str, any_item_has_tax_template: typing.Opti
 
 def submit_document_wrapper(doc, _method=None):
     """submit_document_wrapper"""
+    if not frappe.db.get_value("Company", doc.company, "custom_enable_lhdn_invoice"):
+        return
     frappe.publish_realtime("show_lhdn_loader", {}, user=frappe.session.user)
     try:
         company_name = doc.company
